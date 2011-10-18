@@ -22,9 +22,11 @@ module FlagShihTzu
         :flag_query_mode => :in_list
       }.update(opts)
       colmn = opts[:column].to_s
-
-      return unless check_flag_column(colmn)
-
+      
+      unless opts[:dont_check_existance]
+        return unless check_flag_column(colmn)
+      end
+      
       # options are stored in a class level hash and apply per-column
       # the mappings are stored in this class level hash and apply per-column
       class_eval <<-EVAL
